@@ -29,6 +29,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  get isInitialRoute => null;
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -57,8 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
             FlatButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {return NewRoute();
-                  })
+                    builder: (context) {return NewRoute();},
+                    settings: RouteSettings(name: 'happy', isInitialRoute: true), // 没啥效果啊老铁
+                    // fullscreenDialog: true //表示新的路由页面是否是一个全屏的模态对话框，在iOS中，如果fullscreenDialog为true，新页面将会从屏幕底部滑入（而不是水平方向）
+                  )
                 );
               },
               child: Text("open new route"),
