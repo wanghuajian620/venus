@@ -1,23 +1,38 @@
 import 'package:flutter/material.dart';
-// import 'package:oceanside/newroute.dart';
-// import 'package:oceanside/pages/tab/index.dart';
+import 'package:provider/provider.dart';
+
+import 'package:oceanside/model/theme_model.dart';
+import 'common/constant.dart';
 import 'config/router.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  Color _themeColor;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: ThemeModel())],
+      child: Consumer<ThemeModel>(
+        builder: (context, appinfo, _) {
+          String colorKey =appinfo.themeColor;
+          if(themeColorMap[colorKey] != null) {
+            _themeColor = themeColorMap[colorKey];
+          }
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primaryColor: _themeColor,
+              accentColor: _themeColor,
+              // iconTheme: IconThemeData(color: _themeColor)
+            ),
+            // home: MyHomePage(title: 'Flutter Demo Home Page'),
+            // home: TabNavigator(),
+            onGenerateRoute: Router.generateRoute,
+            initialRoute: RouteName.tab,
+          );
+        }
       ),
-      // home: MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: TabNavigator(),
-      onGenerateRoute: Router.generateRoute,
-      initialRoute: RouteName.tab,
     );
   }
 }
