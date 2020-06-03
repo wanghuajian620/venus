@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flustars/flustars.dart';
+
+import 'package:oceanside/model/theme_model.dart';
 import 'package:oceanside/pages/blog/index.dart';
 import 'package:oceanside/pages/home/index.dart';
 import 'package:oceanside/pages/mine/index.dart';
+
 
 List<Widget> pages = <Widget>[
   Home(),
@@ -20,6 +25,20 @@ class _TabNavigatorState extends State<TabNavigator> {
   var _pageController = PageController();
   int _selectedIndex = 0;
   DateTime _lastPressed;
+  String _colorKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _initAsync();
+  }
+
+  Future<void> _initAsync() async {
+    await SpUtil.getInstance();
+    _colorKey = SpUtil.getString('key_theme_color', defValue: 'blue');
+    // 设置初始化主题颜色
+    Provider.of<ThemeModel>(context, listen: false).setTheme(_colorKey);
+  }
   
   @override
   Widget build(BuildContext context) {
