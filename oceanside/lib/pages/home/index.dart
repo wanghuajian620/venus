@@ -6,7 +6,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('首页')),
       body: Center(
-        child: Text('首页')
+        child: Text('这是重构路由了')
       ),
     );
   }
