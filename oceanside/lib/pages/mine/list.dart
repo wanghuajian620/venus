@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flustars/flustars.dart';
 
+import 'package:oceanside/config/router.dart';
 import 'package:oceanside/model/theme_model.dart';
 import 'package:oceanside/common/constant.dart';
 
@@ -25,7 +26,9 @@ class _OceanListState extends State<OceanList> {
               leading: Icon(Icons.favorite_border, color: themeColorMap[apptheme.themeColor],),
               title: Text('收藏', style: TextStyle(color: themeColorMap[apptheme.themeColor]),),
               trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(RouteName.collectList);
+              },
             ),
             ListTile(
               leading: Icon(Icons.brightness_2, color: themeColorMap[apptheme.themeColor],),
